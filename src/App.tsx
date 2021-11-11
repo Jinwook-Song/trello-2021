@@ -39,6 +39,15 @@ function App() {
         const target = boardCopy.splice(source.index, 1);
         // Put back the item
         boardCopy.splice(destination?.index, 0, ...target);
+
+        // save to local storage
+        localStorage.setItem(
+          "todos",
+          JSON.stringify({
+            ...allBoards,
+            [source.droppableId]: boardCopy,
+          })
+        );
         return {
           ...allBoards,
           [source.droppableId]: boardCopy,
@@ -53,6 +62,16 @@ function App() {
         const destinationBoard = [...allBoards[destination.droppableId]];
         const target = sourceBoard.splice(source.index, 1);
         destinationBoard.splice(destination?.index, 0, ...target);
+
+        // save to local storage
+        localStorage.setItem(
+          "todos",
+          JSON.stringify({
+            ...allBoards,
+            [source.droppableId]: sourceBoard,
+            [destination.droppableId]: destinationBoard,
+          })
+        );
         return {
           ...allBoards,
           [source.droppableId]: sourceBoard,

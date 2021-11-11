@@ -82,6 +82,14 @@ function Board({ todos, boardId }: IBoardProps) {
       text: todo,
     };
     setTodos((allBoards) => {
+      // save to local storage
+      localStorage.setItem(
+        "todos",
+        JSON.stringify({
+          ...allBoards,
+          [boardId]: [newTodo, ...allBoards[boardId]],
+        })
+      );
       return {
         ...allBoards,
         [boardId]: [newTodo, ...allBoards[boardId]],
